@@ -69,7 +69,7 @@ public class TC_SkypeSignIn {
         WebDriverWait watingTime = new WebDriverWait(_driver, 5);
         // Input Password
         password = (WebElement)_driver.findElementsByClassName("android.widget.EditText").get(4);
-        password.sendKeys("123qwe789!");
+        password.sendKeys("Abc123@@");
         // Find ARROW to Continue
         btnContinue2nd.click();
     }
