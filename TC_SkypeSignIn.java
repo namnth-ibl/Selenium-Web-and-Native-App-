@@ -54,21 +54,27 @@ public class TC_SkypeSignIn {
         String Screen1 = _driver.currentActivity();
         System.out.print(Screen1);
         // 1. Input Username
-        //_driver.findElementById("com.skype.raider:id/sign_in_userid").sendKeys("nam2003");
-        username = (WebElement) _driver.findElementsByClassName("android.widget.EditText").get(0);
-        username.sendKeys("nam.nguyen2003");
+        _driver.findElementById("com.skype.raider:id/sign_in_userid").sendKeys("nam2003");
+        
+        //username = (WebElement) _driver.findElementsByClassName("android.widget.EditText").get(0);
+        //username.sendKeys("nam.nguyen2003");
         // 2. Press Continue
         _driver.findElementById("com.skype.raider:id/sign_in_next_btn").click();
+        
         //btnContinue = (WebElement) _driver.findElementsByClassName("android.widget.TextView").get(2);
         //btnContinue.click();
+        
         // Take element from current page
         String Screen2 = _driver.currentActivity();
+        
         // 3. Input Password
         _driver.findElementById("com.skype.raider:id/signin_password").sendKeys("123qwe789");
+        
         //password = (WebElement)_driver.findElementsByClassName("android.widget.EditText").get(1);
         //password.sendKeys("123qwe789!");
         // 4. Press Continue
         _driver.findElementById("com.skype.raider:id/sign_in_btn").click();
+        
         //btnContinue_AfterPassword = (WebElement)_driver.findElementsByClassName("android.widget.TextView").get(2);
         //btnContinue_AfterPassword.click();
         // 5. Wait 5s
