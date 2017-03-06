@@ -7,7 +7,6 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,6 +23,7 @@ public class TC_Browser {
         DesiredCapabilities cap = new DesiredCapabilities();
 
         cap.setCapability("platformName","ANDROID");
+        // Bluestacks's name on CMD
         cap.setCapability("deviceName","emulator-5554");
         cap.setCapability(MobileCapabilityType.APP,"Browser");
 
@@ -34,6 +34,7 @@ public class TC_Browser {
     public void LauchBrowser() throws MalformedURLException
     {
         driver.navigate().to("https://www.google.com.vn");
+        // Inspect Element to find element 
         driver.findElementById("lst-ib").sendKeys("Appium");
        driver.findElementById("lst-ib").sendKeys(Keys.ENTER);
     }
