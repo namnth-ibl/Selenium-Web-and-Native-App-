@@ -37,7 +37,7 @@ public class TC_Browser {
     }
 
     @Test
-    public void LauchBrowser() throws MalformedURLException
+    public void LginFailed() throws MalformedURLException
     {
         String screenHome = driver.currentActivity();
         driver.navigate().to("https://www.skype.com");
