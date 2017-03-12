@@ -30,15 +30,17 @@ public class TC_Browser {
 
         cap.setCapability("platformName","ANDROID");
         cap.setCapability("deviceName","emulator-5554");
+        // Using Default Browser of device
         cap.setCapability(MobileCapabilityType.APP,"Browser");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
     }
 
     @Test
-    public void LginFailed() throws MalformedURLException
+    public void LoginFailed() throws MalformedURLException
     {
         //String screenHome = driver.currentActivity();
+        //Run Browser and go to URL
         driver.navigate().to("https://www.skype.com");
         btnSignIn = (WebElement) driver.findElementByClassName("title");
         btnSignIn.click();
@@ -46,25 +48,26 @@ public class TC_Browser {
         iconSkype.click();
         WebDriverWait wait_01 = new WebDriverWait(driver,10);
 
-        //String screenUsername = driver.currentActivity();
+        //String screenUsername;
+        //screenUsername = driver.currentActivity();
         //assertNotEquals(screenHome,screenUsername);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        userName = driver.findElementByXPath("//div[@class='placeholder has-focus']");
+        userName = driver.findElementById("username");
         userName.sendKeys("nam.nguyen2003");
-        driver.findElementById("idSIButton9").click();
+        driver.findElementById("signIn").click();
         WebDriverWait wait_02 = new WebDriverWait(driver,5);
 
-        //String screenPassword = driver.currentActivity();
+        //String screenPassword;
+        //screenPassword = driver.currentActivity();
         //assertNotEquals(screenUsername,screenPassword);
         password = (WebElement) driver.findElementByClassName("placeholder");
         password.sendKeys("123qwe789");
         driver.findElementById("idSIButton9").click();
         WebDriverWait wait_03 = new WebDriverWait(driver,5);
-
     }
 
     @AfterTest
