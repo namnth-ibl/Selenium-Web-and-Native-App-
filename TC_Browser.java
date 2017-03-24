@@ -58,12 +58,12 @@ public class TC_Browser {
             e.printStackTrace();
         }
         userName = driver.findElementById("username");
-        userName.sendKeys("nam.nguyen2005");
+        userName.sendKeys("Abc123");
         driver.findElementById("signIn").click();
         WebDriverWait wait_02 = new WebDriverWait(driver,5);
 
         password = driver.findElementById("i0118");
-        password.sendKeys("123qwe789");
+        password.sendKeys("******");
         driver.findElementById("idSIButton9").click();
     }
 
@@ -75,12 +75,12 @@ public class TC_Browser {
         driver.navigate().back();
         // Input username
         //driver.findElementById("i0116").sendKeys("namnguyen2003");
-        driver.findElementByName("loginfmt").sendKeys("nam.nth1827");
+        driver.findElementByName("loginfmt").sendKeys("AbcCab");
         // Click Signin
         driver.findElementById("idSIButton9").click();
         WebDriverWait wait_05 = new WebDriverWait(driver,5);
         // Input password
-        driver.findElementByName("passwd").sendKeys("Abc123!");
+        driver.findElementByName("passwd").sendKeys("******");
         // Click Signin
         driver.findElementById("idSIButton9").click();
         // Wait for 30 seconds
