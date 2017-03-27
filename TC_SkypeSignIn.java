@@ -68,7 +68,7 @@ public class TC_SkypeSignIn {
         String Screen2 = _driver.currentActivity();
         
         // 3. Input Password
-        _driver.findElementById("com.skype.raider:id/signin_password").sendKeys("123qwe789");
+        _driver.findElementById("com.skype.raider:id/signin_password").sendKeys("*****");
         
         //password = (WebElement)_driver.findElementsByClassName("android.widget.EditText").get(1);
         //password.sendKeys("123qwe789!");
@@ -99,7 +99,7 @@ public class TC_SkypeSignIn {
         WebDriverWait watingTime = new WebDriverWait(_driver, 5);
         // Input Password
         password = (WebElement)_driver.findElementsByClassName("android.widget.EditText").get(3);
-        password.sendKeys("123qwe789!");
+        password.sendKeys("*****");
         // Find ARROW to Continue
         btnContinue2nd.click();
     }
