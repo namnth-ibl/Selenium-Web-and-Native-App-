@@ -59,7 +59,7 @@ public class TC_SkypeApp {
 
     public void SignInFailed() {
         String screenUserName = _driver.currentActivity();
-        WebDriverWait waitToPresent = new WebDriverWait(_driver,5);
+        WebDriverWait waitToPresent = new WebDriverWait(_driver,10);
 
         waitToPresent.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.skype.raider:id/sign_in_userid")));
 
@@ -69,7 +69,8 @@ public class TC_SkypeApp {
         // 2. Press Continue
         _driver.findElementById("com.skype.raider:id/sign_in_next_btn").click();
 
-        WebDriverWait wait_1st = new WebDriverWait(_driver,7);
+        WebDriverWait wait_1st = new WebDriverWait(_driver,10);
+        wait_1st.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.skype.raider:id/signin_password")));
 
         String screenPassword = _driver.currentActivity();
         assertNotEquals(screenUserName,screenPassword);
@@ -80,7 +81,8 @@ public class TC_SkypeApp {
         _driver.findElementById("com.skype.raider:id/sign_in_btn").click();
 
         // 5. Wait 5s
-        WebDriverWait wait5s = new WebDriverWait(_driver,5);
+        WebDriverWait wait_2nd = new WebDriverWait(_driver,10);
+        wait_2nd.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.skype.raider:id/error_message")));
         // Get Error Message
         String errorMess = _driver.findElementById("com.skype.raider:id/error_message").getText();
         // Check error message is the same
