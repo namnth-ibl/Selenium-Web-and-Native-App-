@@ -133,7 +133,7 @@ public class TC_SkypeApp {
 //        // Clear content of Password field
 //        _driver.findElementById("com.skype.raider:id/signin_password").clear();
 //        // Input Password
-//        _driver.findElementById("com.skype.raider:id/signin_password").sendKeys("123qwe789!");
+//        _driver.findElementById("com.skype.raider:id/signin_password").sendKeys("********");
 //        // Click button Continue
 //        _driver.findElementById("com.skype.raider:id/sign_in_btn").click();
 //        WebDriverWait wait_3rd = new WebDriverWait(_driver, 10);
