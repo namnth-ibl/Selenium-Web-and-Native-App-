@@ -92,24 +92,27 @@ public class TC_SkypeApp {
     }
 
     @Test(priority = 2)
-    public void Register() {
+    public void Register() throws InterruptedException {
         _driver.navigate().back();
-        // Switch context to WEBVIEW
-        String currContext = _driver.getContext(); // will this return NATIVE_APP ?
-        _driver.context("WEBVIEW");
-        _driver.context(currContext);
-        // Second Way
-//        Set<String> contextNames = _driver.getContextHandles();
-//        for (String contextName : contextNames) {
-//            System.out.println(contextNames); //prints out something like NATIVE_APP \n WEBVIEW_1
-//        }
-//        _driver.context(contextNames.toArray()[1]); // set context to WEBVIEW_1
 
         // Part 1 of Register
         _driver.findElementById("com.skype.raider:id/create_account_label").click();
+
+        Thread.sleep(5000);
+
+        Set<String> contextNames = _driver.getContextHandles();
+        for(String contextMem : contextNames) {
+            System.out.println("List of Contexts: " + contextNames);
+            if(contextMem.contains("WEBVIEW"))
+            {
+                _driver.context(contextMem);
+                System.out.println("Switch to: "+ contextMem);
+            }
+        }
+
         WebDriverWait wait_for_register = new WebDriverWait(_driver,10);
         wait_for_register.until(ExpectedConditions.visibilityOfElementLocated(By.id("MemberName")));
-        _driver.findElementById("MemberName").sendKeys("1668333911");
+        _driver.findElementById("MemberName").sendKeys("000000000");
         _driver.findElementById("Password").sendKeys("123qwe789");
         _driver.findElementById("iSignupAction").click();
         WebDriverWait wait_for_next_regiter = new WebDriverWait(_driver,5);
@@ -119,9 +122,11 @@ public class TC_SkypeApp {
         _driver.findElementById("iSignupAction").click();
         WebDriverWait wait_for_verifyCode = new WebDriverWait(_driver, 5);
         // Part 3 of Register
-        _driver.findElementById("VerificationCode").sendKeys("2985");
+        _driver.findElementById("VerificationCode").sendKeys("0000");
         _driver.findElementById("iSignupAction").click();
         WebDriverWait wait_for_process = new WebDriverWait(_driver,10);
+
+        _driver.context("NATIVE_APP");
     }
 
 //    @Test(priority = 3)
@@ -129,7 +134,7 @@ public class TC_SkypeApp {
 //        // Clear content of Username field
 //        _driver.findElementById("com.skype.raider:id/signin_skypename").clear();
 //        // Input Username
-//        _driver.findElementById("com.skype.raider:id/signin_skypename").sendKeys("namnguyen2003");
+//        _driver.findElementById("com.skype.raider:id/signin_skypename").sendKeys("123456789");
 //        // Clear content of Password field
 //        _driver.findElementById("com.skype.raider:id/signin_password").clear();
 //        // Input Password
