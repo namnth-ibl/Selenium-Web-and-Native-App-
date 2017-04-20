@@ -108,8 +108,14 @@ public class TC_SkypeApp {
                 _driver.context(contextMem);
                 System.out.println("Switch to: "+ contextMem);
             }
+        }      
+        /* // In case of the list has 3 members.
+         Set<String> contextNames = _driver.getContextHandles();
+        for(String contextMem : contextNames) {
+            System.out.println("List of Contexts: " + contextNames);
         }
-
+        _driver.context((String)contextNames.toArray()[2]);  
+        */
         WebDriverWait wait_for_register = new WebDriverWait(_driver,10);
         wait_for_register.until(ExpectedConditions.visibilityOfElementLocated(By.id("MemberName")));
         _driver.findElementById("MemberName").sendKeys("000000000");
