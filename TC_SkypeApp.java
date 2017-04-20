@@ -102,34 +102,40 @@ public class TC_SkypeApp {
 
         Set<String> contextNames = _driver.getContextHandles();
         for(String contextMem : contextNames) {
-            System.out.println("List of Contexts: " + contextNames);
-            if(contextMem.contains("WEBVIEW"))
+            //System.out.println("List of Contexts: " + contextNames);
+            if(contextMem.contains("WEBVIEW_com.skype.raider"))
             {
                 _driver.context(contextMem);
-                System.out.println("Switch to: "+ contextMem);
+                System.out.println("Switch 1st to: "+ contextMem);
             }
-        }      
-        /* // In case of the list has 3 members.
-         Set<String> contextNames = _driver.getContextHandles();
-        for(String contextMem : contextNames) {
-            System.out.println("List of Contexts: " + contextNames);
         }
-        _driver.context((String)contextNames.toArray()[2]);  
-        */
+        List<WebElement> listEditText;
         WebDriverWait wait_for_register = new WebDriverWait(_driver,10);
-        wait_for_register.until(ExpectedConditions.visibilityOfElementLocated(By.id("MemberName")));
-        _driver.findElementById("MemberName").sendKeys("000000000");
+        _driver.findElementById("MemberName").sendKeys("123456789");
         _driver.findElementById("Password").sendKeys("123qwe789");
         _driver.findElementById("iSignupAction").click();
         WebDriverWait wait_for_next_regiter = new WebDriverWait(_driver,5);
         // Part 2 of Register
-        _driver.findElementById("FirstName").sendKeys("Nam");
-        _driver.findElementById("LastName").sendKeys("Nguyen");
-        _driver.findElementById("iSignupAction").click();
+        for(String contextMem2nd : contextNames) {
+            //System.out.println("List of Contexts: " + contextNames);
+            if(contextMem2nd.contains("NATIVE_APP"))
+            {
+                _driver.context(contextMem2nd);
+                System.out.println("Switch 2nd to: "+ contextMem2nd);
+            }
+        }
+        // Input Name
+        listEditText = (List<WebElement>)_driver.findElementsByClassName("android.widget.EditText");
+        listEditText.get(0).sendKeys("Nam");
+        listEditText.get(1).sendKeys("Nguyen");
+        // Click button Next
+        List<WebElement> listBtn = _driver.findElementsByClassName("android.widget.Button");
+        listBtn.get(1).click();
         WebDriverWait wait_for_verifyCode = new WebDriverWait(_driver, 5);
         // Part 3 of Register
-        _driver.findElementById("VerificationCode").sendKeys("0000");
-        _driver.findElementById("iSignupAction").click();
+        _driver.findElementByClassName("android.widget.EditText").sendKeys("2895");
+        List<WebElement> listButton2nd = _driver.findElementsByClassName("android.widget.Button");
+        listButton2nd.get(1).click();
         WebDriverWait wait_for_process = new WebDriverWait(_driver,10);
 
         _driver.context("NATIVE_APP");
