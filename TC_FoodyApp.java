@@ -2,16 +2,21 @@ package TC_FOODY;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import sun.security.krb5.internal.crypto.Des;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -30,14 +35,17 @@ public class TC_FoodyApp {
         DesiredCapabilities cap = new DesiredCapabilities();
         // Set information of device (Emulator)
         cap.setCapability("platformName","ANDROID");
-        cap.setCapability("deviceName","CB5A1UP4XV");
+        // Real Device
+        //cap.setCapability("deviceName","CB5A1UP4XV");
+        // BlueStacks
+        cap.setCapability("deviceName","emulator-5554");
         cap.setCapability("packageName","com.foody.vn.activity");
         cap.setCapability("appActivity","com.foody.ui.activities.NewFlashActivity");
 
         // Create connection to server
         driver = new AndroidDriver(new URL(connectionString), cap);
     }
-
+/*
     // Run App 1st time - Using for the 1st installation
     @Test(priority = 1)
     public void SelectLanguages()throws  MalformedURLException
@@ -57,16 +65,16 @@ public class TC_FoodyApp {
         WebDriverWait wait_for_Loading = new WebDriverWait(driver,20);
         wait_for_Loading.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.foody.vn.activity:id/buttonSkipIntro")));
         driver.findElementById("com.foody.vn.activity:id/buttonSkipIntro").click();
-
     }
-
-    @Test(priority = 2)
+*/
+    @Test
     public  void Register() throws InterruptedException {
-        Thread.sleep(20000);
-        WebDriverWait wait_for_TabMore = new WebDriverWait(driver,10);
-        wait_for_TabMore.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.foody.vn.activity:id/llTabMore")));
-        // Click "Tai Khoan" Tab
-        driver.findElementById("com.foody.vn.activity:id/llTabMore").click();
+        Thread.sleep(5000);
+        String currActivity = driver.currentActivity();
+        System.out.println(currActivity);
+
+        List<WebElement> lstImgView = (List<WebElement>) driver.findElementsByClassName("android.widget.ImageView");
+        lstImgView.get(22).click();
         // Click "Dang Nhap"
         WebDriverWait wait_for_tvLogin = new WebDriverWait(driver,10);
         wait_for_tvLogin.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.foody.vn.activity:id/tvLogin")));
@@ -82,7 +90,16 @@ public class TC_FoodyApp {
         assertEquals(errorText,"Please enter a valid phone number.");
         // Click "Thu lai" to retry
         driver.findElementById("com.foody.vn.activity:id/com_accountkit_start_over_button").click();
+        // Input valid number
+        driver.findElementById("com.foody.vn.activity:id/com_accountkit_phone_number").clear();
+        driver.findElementById("com.foody.vn.activity:id/com_accountkit_phone_number").sendKeys("1689889383");
+        // Click "Tiep"
+        driver.findElementById("com.foody.vn.activity:id/com_accountkit_next_button").click();
+    }
 
-
+    @AfterTest
+    public  void AffterTest()
+    {
+        driver.quit();
     }
 }
