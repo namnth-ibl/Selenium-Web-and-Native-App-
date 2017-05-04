@@ -69,12 +69,14 @@ public class TC_FoodyApp {
 */
     @Test
     public  void Register() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         String currActivity = driver.currentActivity();
         System.out.println(currActivity);
-
-        List<WebElement> lstImgView = (List<WebElement>) driver.findElementsByClassName("android.widget.ImageView");
-        lstImgView.get(22).click();
+        // ----- WARNING: Issue - Elements are not loaded enough -----
+//        List<WebElement> lstImgView = (List<WebElement>) driver.findElementsByClassName("android.widget.ImageView");
+//        System.out.println("Size: " + lstImgView.size());
+//        lstImgView.get(20).click();
+        driver.findElementById("com.foody.vn.activity:id/llTabMore").click();
         // Click "Dang Nhap"
         WebDriverWait wait_for_tvLogin = new WebDriverWait(driver,10);
         wait_for_tvLogin.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.foody.vn.activity:id/tvLogin")));
@@ -92,9 +94,15 @@ public class TC_FoodyApp {
         driver.findElementById("com.foody.vn.activity:id/com_accountkit_start_over_button").click();
         // Input valid number
         driver.findElementById("com.foody.vn.activity:id/com_accountkit_phone_number").clear();
-        driver.findElementById("com.foody.vn.activity:id/com_accountkit_phone_number").sendKeys("1689889383");
+        driver.findElementById("com.foody.vn.activity:id/com_accountkit_phone_number").sendKeys("1689889381");
         // Click "Tiep"
         driver.findElementById("com.foody.vn.activity:id/com_accountkit_next_button").click();
+//        // Wait for Passcode
+//        WebDriverWait wait_for_Passcode = new WebDriverWait(driver,10);
+//        // Input Passcode
+//        driver.findElementById("com.foody.vn.activity:id/com_accountkit_content_top_fragment").sendKeys("090909");
+//        // Click "Tiep tuc"
+//        driver.findElementById("com.foody.vn.activity:id/com_accountkit_next_button").click();
     }
 
     @AfterTest
