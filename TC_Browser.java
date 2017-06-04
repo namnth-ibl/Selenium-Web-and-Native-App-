@@ -3,6 +3,7 @@ package TC_WEB;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,7 +15,7 @@ import java.util.Set;
  */
 public class TC_Browser {
 
-    public  static  void main (String[] args )
+    public static  void Registration()
     {
         // Setup gecko driver to run Firefox (Should: Selenium > 3.0)
         String geckoPath = "C://Users//Nam//FireFoxDriver//geckodriver.exe";
@@ -57,19 +58,36 @@ public class TC_Browser {
         driver.findElement(By.id("LastName")).sendKeys("Nguyễn");
         // Enter "Email"
         driver.findElement(By.id("register_email")).sendKeys("hoainamvn2014@gmail.com");
+        System.out.println("Đã enter Email");
         // Click "Chọn tỉnh/thành"
-        driver.findElement(By.id("StateProvinceId")).click();
+        WebDriverWait wait_5s = new WebDriverWait(driver,5);
+        driver.findElement(By.xpath("//*[@id=\"StateProvinceId\"]")).click();
+        System.out.println("Đã chọn Combo Box");
         // Select "TP. HCM"
+        WebDriverWait wait_3s = new WebDriverWait(driver,3);
         driver.findElement(By.xpath("//*[@id=\"StateProvinceId\"]/option[2]")).click();
+        System.out.println("Đã chọn HCM");
         // Enter "Mật Khẩu"
         driver.findElement(By.id("register_pass")).sendKeys("lamjcopassAnh2");
+        System.out.println("Đã enter mật khẩu");
         // Enter "Nhập Lại Mật Khẩu"
         WebDriverWait wait_for_Eelement01 = new WebDriverWait(driver,10);
-        wait_for_Eelement01.until(ExpectedConditions.visibilityOfElementLocated(By.id("ConfrimPassword")));
-        driver.findElement(By.id("ConfrimPassword")).sendKeys("lamjcopassAnh2");
+        wait_for_Eelement01.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='ConfirmPassword']")));
+        driver.findElement(By.xpath("//*[@id='ConfirmPassword']")).sendKeys("lamjcopassAnh2");
+        System.out.println("Đã enter confirm mật khẩu");
         // Check "I'm not a robot"
+        // ---- Switch to iFrame ----
+        WebElement iFrame = driver.findElement(By.xpath("//*[@id=\"reCaptchaRegister\"]/div/div/iframe"));
+        driver.switchTo().frame(iFrame);
         driver.findElement(By.xpath("//*[@id=\"recaptcha-anchor\"]/div[5]")).click();
+        System.out.println("Đã click Robot Captcha");
         // Click "Đăng Ký"
-        driver.findElement(By.xpath("//*[@id=\"registerForm\"]/table/tbody/tr[10]/td[2]/button")).click();
+        driver.findElement(By.className("registerbutton")).click();
+        System.out.println("Đã click đăng ký");
+    }
+
+    public  static  void main (String[] args )
+    {
+        Registration();
     }
 }
