@@ -68,12 +68,12 @@ public class TC_Browser {
         driver.findElement(By.xpath("//*[@id=\"StateProvinceId\"]/option[2]")).click();
         System.out.println("Đã chọn HCM");
         // Enter "Mật Khẩu"
-        driver.findElement(By.id("register_pass")).sendKeys("lamjcopassAnh2");
+        driver.findElement(By.id("register_pass")).sendKeys("123123123");
         System.out.println("Đã enter mật khẩu");
         // Enter "Nhập Lại Mật Khẩu"
         WebDriverWait wait_for_Eelement01 = new WebDriverWait(driver,10);
         wait_for_Eelement01.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='ConfirmPassword']")));
-        driver.findElement(By.xpath("//*[@id='ConfirmPassword']")).sendKeys("lamjcopassAnh2");
+        driver.findElement(By.xpath("//*[@id='ConfirmPassword']")).sendKeys("123123123");
         System.out.println("Đã enter confirm mật khẩu");
         // Check "I'm not a robot"
         // ---- Switch to iFrame ----
