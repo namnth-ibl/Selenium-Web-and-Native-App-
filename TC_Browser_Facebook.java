@@ -85,7 +85,7 @@ public class TC_Browser_Facebook {
         System.out.println("3 - Selected Year: 1992");
 
         // Select Gender
-        driver.findElement(By.name("Male")).click();
+        driver.findElement(By.id("u_0_7")).click();
         System.out.println("Selected Male");
 
         System.out.println("Done Test...");
