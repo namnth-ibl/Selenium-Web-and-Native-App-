@@ -72,7 +72,7 @@ public class TC_Browser_Facebook {
         WebElement month = driver.findElement(By.name("birthday_month"));
         Select dl_Month = new Select(month);
         // -------- Get value of Month --------
-        dl_Day.selectByValue("6");
+        dl_Month.selectByValue("6");
         System.out.println("2 - Selected Month: 6");
 
         WebDriverWait wait_5_unitl_Year = new WebDriverWait(driver, 5);
@@ -81,7 +81,7 @@ public class TC_Browser_Facebook {
         WebElement year = driver.findElement(By.name("birthday_year"));
         Select dl_Year = new Select(year);
         // -------- Get value of Year --------
-        dl_Day.selectByValue("1992");
+        dl_Year.selectByValue("1992");
         System.out.println("3 - Selected Year: 1992");
 
         // Select Gender
