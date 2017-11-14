@@ -9,14 +9,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Nam on 5/25/2017.
  */
 public class TC_Browser_Facebook {
-    public static  void Registration()
-    {
+    public static  void Registration() throws InterruptedException {
         // Setup gecko driver to run Firefox (Should: Selenium > 3.0)
         String geckoPath = "C://Users//Nam//FireFoxDriver//geckodriver.exe";
         System.setProperty("webdriver.gecko.driver",geckoPath);
@@ -25,6 +30,16 @@ public class TC_Browser_Facebook {
 
         // Enter link
         driver.get("https://www.facebook.com");
+
+        // Check if English is disabled (its mean: !enable)
+        WebElement labelEnglish = driver.findElement(By.xpath("//*[@id=\"pageFooter\"]/ul/li[2]/a"));
+        if(!labelEnglish.isSelected())
+        {
+            // Enable - click it
+            driver.findElement(By.xpath("//*[@id=\"pageFooter\"]/ul/li[2]/a")).click();
+            System.out.println("Selected English.");
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        }
 
         // Enter Email
         driver.findElement(By.id("email")).sendKeys("abc@gmail.com");
@@ -85,14 +100,66 @@ public class TC_Browser_Facebook {
         System.out.println("3 - Selected Year: 1992");
 
         // Select Gender
-        driver.findElement(By.id("u_0_7")).click();
+        WebDriverWait waitForrbMale = new WebDriverWait(driver,7);
+        waitForrbMale.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"u_0_4\"]")));
+        driver.findElement(By.xpath("//*[@id=\"u_0_4\"]")).click();
         System.out.println("Selected Male");
+
+        Thread.sleep(2000);
+
+        // Click Create an account
+        driver.findElement(By.xpath("//*[@id=\"reg_form_box\"]/div[9]/button")).click();
+        System.out.println("Clicked Create an account");
+
+        // Wait until Error mess. appears
+        WebDriverWait wait_for_error = new WebDriverWait(driver,40);
+        wait_for_error.until(ExpectedConditions.visibilityOfElementLocated(By.id("reg_error_inner")));
+
+        // Create a string to compare with element error mess.
+        String same_Email = "Too many users have this email listed as pending.";
+        String error = "An error occurred. Please try again.";
+        String sameEmailUser = driver.findElement(By.id("reg_error_inner")).getText();
+        System.out.println("Mess. ERROR: " + sameEmailUser.toString());
+
+         //Compare with var. error mess.
+        assertEquals(sameEmailUser,error);
+        System.out.println("Same text.");
+
+        // Click on "Quên tài khoản"
+        driver.findElement(By.xpath("//*[@id=\"login_form\"]/table/tbody/tr[3]/td[2]/div/a")).click();
+        System.out.println("Clicked Quên tài khoản?");
+
+        // Enter Email or phone No.
+        driver.findElement(By.id("identify_email")).sendKeys("01234567890");
+        System.out.println("Entered Phone No.");
+
+        // Click Tìm kiếm
+        driver.findElement(By.id("u_0_2")).click();
+        System.out.println("Clicked Tìm kiếm");
+
+        // Backt to Home Page
+        driver.navigate().back();
+        System.out.println("Back the 1st time.");
+        driver.navigate().back();
+        System.out.println("Back the 2nd times.");
+        // Wait for page loading
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        System.out.println("Wait for Loading Page - 5s.");
+
+        // Click on "Data Policy"
+        driver.findElement(By.xpath("//*[@id=\"privacy-link\"]")).click();
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1)).getTitle();
+        System.out.println("Switch to new Tab.");
 
         System.out.println("Done Test...");
     }
 
-    public  static  void main (String[] args )
-    {
-        Registration();
+    public  static  void main (String[] args ) throws InterruptedException {
+        try {
+            Registration();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
