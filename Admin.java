@@ -47,7 +47,7 @@ public class Admin {
         System.out.println("Entered username.");
         // Enter password
         driver.findElement(By.xpath("//*[@id=\"sign_in\"]/div[3]/div/input"))
-                .sendKeys("123@Ngoc");
+                .sendKeys("123@");
         System.out.println("Entered password.");
         // Click Sign in
         driver.findElement(By.xpath("//*[@id=\"sign_in\"]/div[4]/div[2]/button")).click();
